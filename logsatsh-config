@@ -1,0 +1,23 @@
+# Sample Logstash configuration for creating a simple
+# Beats -> Logstash -> Elasticsearch pipeline.
+
+input {
+  kafka {
+    bootstrap_servers => "localhost:9092"
+    topics => ["topic2"]
+    codec => "json"
+  }
+}
+
+filter {
+}
+
+output {
+  elasticsearch {
+    hosts => ["localhost:9200"]
+    index => "word"
+  }
+  stdout {
+    codec => rubydebug
+  }
+}
